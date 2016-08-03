@@ -4,13 +4,13 @@ import util.TODO
 import util.doc8
 
 interface Expr
-class Num(val value: Int) : Expr
-class Sum(val left: Expr, val right: Expr) : Expr
+data class Num(val value: Int) : Expr
+data class Sum(val left: Expr, val right: Expr) : Expr 
 
 fun eval(e: Expr): Int =
         when (e) {
-            is Num -> todoTask8(e)
-            is Sum -> todoTask8(e)
+            is Num -> e.value
+            is Sum -> eval(e.left) + eval(e.right)
             else -> throw IllegalArgumentException("Unknown expression")
         }
 
